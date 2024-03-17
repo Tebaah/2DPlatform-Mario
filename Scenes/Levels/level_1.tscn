@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://6j2k4n0uono1"]
+
+[ext_resource type="Texture2D" uid="uid://cqtlj6f4sg1l0" path="res://Assets/Tiles/kenney_platformer-pack-redux/PNG/Ground/Grass/grassCenter.png" id="1_7r6dq"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7rfyw"]
+texture = ExtResource("1_7r6dq")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[sub_resource type="TileSet" id="TileSet_odsq0"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 2
+sources/4 = SubResource("TileSetAtlasSource_7rfyw")
+
+[node name="Level 1" type="Node"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_odsq0")
+format = 2
+layer_0/name = "Floor"
+layer_0/tile_data = PackedInt32Array(458752, 4, 0, 458753, 4, 0, 458754, 4, 0, 458755, 4, 0, 458756, 4, 0, 458757, 4, 0, 458758, 4, 0, 458759, 4, 0, 458760, 4, 0, 458761, 4, 0, 458762, 4, 0, 458763, 4, 0, 458764, 4, 0, 458765, 4, 0, 458766, 4, 0, 524302, 4, 0, 524301, 4, 0, 524300, 4, 0, 524299, 4, 0, 524298, 4, 0, 524297, 4, 0, 524296, 4, 0, 524295, 4, 0, 524294, 4, 0, 524293, 4, 0, 524292, 4, 0, 524291, 4, 0, 524290, 4, 0, 524289, 4, 0, 524288, 4, 0)

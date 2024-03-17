@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://bh3v8hx61myb"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerController.cs" id="1_tj1d0"]
+[ext_resource type="Texture2D" uid="uid://csaoky6nej3cd" path="res://Assets/Tiles/kenney_platformer-pack-redux/PNG/Players/Variable sizes/Blue/alienBlue_hit.png" id="2_2w1sm"]
+[ext_resource type="Texture2D" uid="uid://cxsprfbtudjj" path="res://Assets/Tiles/kenney_platformer-pack-redux/PNG/Players/Variable sizes/Blue/alienBlue_stand.png" id="2_s811v"]
+[ext_resource type="Texture2D" uid="uid://dvbnu7qeeidmo" path="res://Assets/Tiles/kenney_platformer-pack-redux/PNG/Players/Variable sizes/Blue/alienBlue_jump.png" id="4_1dpvl"]
+[ext_resource type="Texture2D" uid="uid://dex5gi0kvgyx0" path="res://Assets/Tiles/kenney_platformer-pack-redux/PNG/Players/Variable sizes/Blue/alienBlue_walk1.png" id="5_qs4ki"]
+[ext_resource type="Texture2D" uid="uid://dh1o44fcjx5ke" path="res://Assets/Tiles/kenney_platformer-pack-redux/PNG/Players/Variable sizes/Blue/alienBlue_walk2.png" id="6_k66hk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ld6e5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2w1sm")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_s811v")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_1dpvl")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_qs4ki")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_k66hk")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8qgk1"]
+radius = 46.0
+height = 184.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_tj1d0")
+speed = 200.0
+jumpForce = 400.0
+
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ld6e5")
+animation = &"idle"
+autoplay = "idle"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_8qgk1")
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_bottom = 1080

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://btn4jcsvtqwwc"]
+
+[ext_resource type="PackedScene" uid="uid://6j2k4n0uono1" path="res://Scenes/Levels/level_1.tscn" id="1_h0sr6"]
+[ext_resource type="PackedScene" uid="uid://bh3v8hx61myb" path="res://Scenes/Characters/Player/player.tscn" id="2_ge5je"]
+
+[node name="Main" type="Node"]
+metadata/_edit_horizontal_guides_ = [1080.0]
+
+[node name="Level 1" parent="." instance=ExtResource("1_h0sr6")]
+
+[node name="Player" parent="." instance=ExtResource("2_ge5je")]
+position = Vector2(593, 802)
+jumpForce = 600.0
