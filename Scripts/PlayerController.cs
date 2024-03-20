@@ -13,6 +13,8 @@ public partial class PlayerController : CharacterBody2D
     // variables para nodos hijos
     private AnimatedSprite2D _animations;
 
+    // variables para el estado del personaje
+    private bool _isHit = false;
 
 
     // metodos
@@ -23,8 +25,12 @@ public partial class PlayerController : CharacterBody2D
     }
     public override void _PhysicsProcess(double delta)
     {
-        {
+        
         Vector2 velocity = Velocity;
+
+        // accion de movimiento en eje x
+        float direction = Input.GetAxis("left", "right");
+        velocity.X = direction * speed;
 
         // agregamos la gravedad
         if(!IsOnFloor())
@@ -36,26 +42,58 @@ public partial class PlayerController : CharacterBody2D
         if (Input.IsActionJustPressed("jump") && IsOnFloor())
         {
             velocity.Y = -jumpForce;
-            _animations.Play("jump");
+        }
+        
+        // accion de hit
+        if(_isHit)
+        {
+            velocity.Y = -50;
+            velocity.X = direction * -750; // TODO crear variables para el hit
         }
 
-        // accion de movimiento en eje x
-        float direction = Input.GetAxis("left", "right");
-        velocity.X = direction * speed;
 
-        if (direction != 0)
+        // actualizamos la animacion
+        UpdateSpriteRender(velocity.Y, velocity.X);
+
+        Velocity = velocity;
+        MoveAndSlide();
+    
+    }
+
+    private void UpdateSpriteRender(float VelocityY, float VelocityX)
+    {
+        bool walking = VelocityX != 0;
+        bool jumping = VelocityY != 0;
+
+        if(walking && IsOnFloor())
         {
             _animations.Play("walk");
-            _animations.FlipH = direction < 0;
+            _animations.FlipH = VelocityX < 0;
         }
         else
         {
             _animations.Play("idle");
         }
-
-        Velocity = velocity;
-        MoveAndSlide();
+        if(jumping)
+        {
+            _animations.Play("jump");
+            
         }
+        if(_isHit)
+        {
+            _animations.Play("hit");
+        }
+    }
+
+    private async void OnAreaBodyEntered(Area2D body)
+    {
+        if(body.IsInGroup("Enemy"))
+        {
+            GD.Print("Hit by enemy");
+            _isHit = true;            
+        }
+        await ToSignal(GetTree().CreateTimer(0.4), "timeout");
+        _isHit = false;
     }
 
 }

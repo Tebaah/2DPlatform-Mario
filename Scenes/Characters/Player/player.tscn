@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bh3v8hx61myb"]
+[gd_scene load_steps=10 format=3 uid="uid://bh3v8hx61myb"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerController.cs" id="1_tj1d0"]
 [ext_resource type="Texture2D" uid="uid://csaoky6nej3cd" path="res://Assets/Tiles/kenney_platformer-pack-redux/PNG/Players/Variable sizes/Blue/alienBlue_hit.png" id="2_2w1sm"]
@@ -49,8 +49,13 @@ animations = [{
 radius = 46.0
 height = 184.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_udpbt"]
+radius = 46.0
+height = 180.0
+
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 2
+position = Vector2(-1, -1)
+collision_mask = 6
 script = ExtResource("1_tj1d0")
 speed = 200.0
 jumpForce = 400.0
@@ -68,3 +73,11 @@ metadata/_edit_lock_ = true
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = 0
 limit_bottom = 1080
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_udpbt")
+
+[connection signal="area_entered" from="Area2D" to="." method="OnAreaBodyEntered"]
