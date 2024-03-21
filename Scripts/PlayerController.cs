@@ -16,12 +16,16 @@ public partial class PlayerController : CharacterBody2D
     // variables para el estado del personaje
     private bool _isHit = false;
 
+    // variable global
+    private Global _global;
+
 
     // metodos
     public override void _Ready()
     {
         // inicializar componentes
         _animations = GetNode<AnimatedSprite2D>("Animations");
+        _global = GetNode<Global>("/root/Global");
     }
     public override void _PhysicsProcess(double delta)
     {
@@ -90,6 +94,7 @@ public partial class PlayerController : CharacterBody2D
         if(body.IsInGroup("Enemy"))
         {
             GD.Print("Hit by enemy");
+            _global.lifePlayer -= 1;
             _isHit = true;            
         }
         await ToSignal(GetTree().CreateTimer(0.4), "timeout");
