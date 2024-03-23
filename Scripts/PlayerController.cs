@@ -15,6 +15,7 @@ public partial class PlayerController : CharacterBody2D
 
     // variables para el estado del personaje
     private bool _isHit = false;
+    private bool _isJumping = false;
 
     // variable global
     private Global _global;
@@ -27,6 +28,15 @@ public partial class PlayerController : CharacterBody2D
         _animations = GetNode<AnimatedSprite2D>("Animations");
         _global = GetNode<Global>("/root/Global");
     }
+    public override void _Process(double delta)
+    {
+        if(Position.Y >= 1080)
+        {
+            _global.isAlive = false;
+        }
+    }
+
+    // actualizaciones fisicas del juego
     public override void _PhysicsProcess(double delta)
     {
         
@@ -41,13 +51,17 @@ public partial class PlayerController : CharacterBody2D
         {
             velocity.Y += gravity * (float)delta;
         }
+        else if(IsOnFloor())
+        {
+            _isJumping = false;
+        }
 
         // accion de salto
         if (Input.IsActionJustPressed("jump") && IsOnFloor())
         {
             velocity.Y = -jumpForce;
+            _isJumping = true;
         }
-        
         // TODO: accion de hit
 
         // actualizamos la animacion
@@ -74,8 +88,7 @@ public partial class PlayerController : CharacterBody2D
         }
         if(jumping)
         {
-            _animations.Play("jump");
-            
+            _animations.Play("jump");            
         }
         if(_isHit)
         {
@@ -86,22 +99,23 @@ public partial class PlayerController : CharacterBody2D
     private async void OnAreaBodyEntered(Area2D body)
     {
         // colision con enemigos
-        if(body.IsInGroup("Enemy"))
+        // elimina a los eenmigos
+        if(body.IsInGroup("Enemy") && _isJumping)
+        {
+            GD.Print("Hit by enemy from top");
+            body.QueueFree();   
+        }
+        // pierde unha vida el personaje
+        else if(body.IsInGroup("Enemy"))
         {
             GD.Print("Hit by enemy");
             _global.lifePlayer -= 1;
             _isHit = true;            
 
-            if(Position.X < body.Position.X)
-            {
-                GD.Print("Hit by enemy from left");
-            }
-            else
-            {
-                GD.Print("Hit by enemy from right");
-            }
-        await ToSignal(GetTree().CreateTimer(0.4), "timeout");
-        _isHit = false;
+            // TODO: impulso en direccion contraria a la que va
+
+            await ToSignal(GetTree().CreateTimer(0.4), "timeout");
+            _isHit = false;
         }
 
         // recolectar monedas

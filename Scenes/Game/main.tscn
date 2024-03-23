@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://cm042cttaw1qu" path="res://Scenes/Objects/life.tscn" id="5_81ewf"]
 
 [node name="Main" type="Node"]
-metadata/_edit_horizontal_guides_ = [1080.0]
 
 [node name="GUI" parent="." instance=ExtResource("1_mv4ib")]
 offset_left = -2.0
@@ -20,10 +19,16 @@ position = Vector2(593, 802)
 jumpForce = 600.0
 
 [node name="BeeEnemy" parent="." instance=ExtResource("3_oyc3t")]
-position = Vector2(867, 806)
+position = Vector2(868, 808)
+
+[node name="BeeEnemy2" parent="." instance=ExtResource("3_oyc3t")]
+position = Vector2(1271, 808)
+
+[node name="BeeEnemy3" parent="." instance=ExtResource("3_oyc3t")]
+position = Vector2(1057, 808)
 
 [node name="Life" parent="." instance=ExtResource("5_81ewf")]
-position = Vector2(166, 671)
+position = Vector2(166, 670)
 
 [node name="Life2" parent="." instance=ExtResource("5_81ewf")]
 position = Vector2(395, 633)

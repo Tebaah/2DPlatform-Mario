@@ -8,6 +8,7 @@ public partial class UiController : Control
 
     private AnimatedSprite2D _lifeAnimation;
     private Label _coinLabel;
+    private Label _gameOverLabel;
 
     public override void _Ready()
     {
@@ -15,6 +16,7 @@ public partial class UiController : Control
         _global = GetNode<Global>("/root/Global");
         _lifeAnimation = GetNode<AnimatedSprite2D>("BoxContainer/HBoxContainer/AnimatedSprite2D");
         _coinLabel = GetNode<Label>("BoxContainer/HBoxContainer2/Label");
+        _gameOverLabel = GetNode<Label>("BoxContainer2/Label");
     }
 
     public override void _Process(double delta)
@@ -36,5 +38,11 @@ public partial class UiController : Control
         // actualizar las monedas del jugador en GUI
         int coins = _global.coins;
         _coinLabel.Text = $"Coins {coins}";
+
+        // activar game over al morir
+        if(_global.isAlive == false)
+        {
+            _gameOverLabel.Visible = true;
+        }
     }
 }

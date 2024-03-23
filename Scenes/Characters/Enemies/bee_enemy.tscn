@@ -34,8 +34,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_i82p0"]
-radius = 49.0918
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pxdlh"]
+radius = 23.0
+height = 94.0
 
 [node name="BeeEnemy" type="Area2D" groups=["Enemy"]]
 collision_layer = 4
@@ -45,4 +46,6 @@ sprite_frames = SubResource("SpriteFrames_1ip1v")
 animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_i82p0")
+position = Vector2(0, 4)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_pxdlh")
