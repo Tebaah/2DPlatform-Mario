@@ -48,13 +48,7 @@ public partial class PlayerController : CharacterBody2D
             velocity.Y = -jumpForce;
         }
         
-        // accion de hit
-        if(_isHit)
-        {
-            velocity.Y = -50;
-            velocity.X = direction * -750; // TODO crear variables para el hit
-        }
-
+        // TODO: accion de hit
 
         // actualizamos la animacion
         UpdateSpriteRender(velocity.Y, velocity.X);
@@ -91,14 +85,41 @@ public partial class PlayerController : CharacterBody2D
 
     private async void OnAreaBodyEntered(Area2D body)
     {
+        // colision con enemigos
         if(body.IsInGroup("Enemy"))
         {
             GD.Print("Hit by enemy");
             _global.lifePlayer -= 1;
             _isHit = true;            
-        }
+
+            if(Position.X < body.Position.X)
+            {
+                GD.Print("Hit by enemy from left");
+            }
+            else
+            {
+                GD.Print("Hit by enemy from right");
+            }
         await ToSignal(GetTree().CreateTimer(0.4), "timeout");
         _isHit = false;
+        }
+
+        // recolectar monedas
+        if(body.IsInGroup("Coin"))
+        {
+            GD.Print("Coin collected");
+            _global.coins += 1;
+            body.QueueFree();
+        }
+
+        // recoletar vidas
+        if(body.IsInGroup("Life"))
+        {
+            GD.Print("Life collected");
+            _global.lifePlayer += 1;
+            body.QueueFree();
+        }
     }
+
 
 }

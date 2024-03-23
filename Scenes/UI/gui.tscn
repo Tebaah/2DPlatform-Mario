@@ -1,6 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://ro3n5thlv5qx"]
+[gd_scene load_steps=6 format=3 uid="uid://ro3n5thlv5qx"]
 
 [ext_resource type="Script" path="res://Scripts/UiController.cs" id="1_4xk2o"]
+[ext_resource type="Texture2D" uid="uid://dv0xlfkb3yl1i" path="res://Assets/Tiles/kenney_platformer-pack-redux/PNG/HUD/hudHeart_empty.png" id="2_5od0i"]
+[ext_resource type="Texture2D" uid="uid://calrkjsqfu160" path="res://Assets/Tiles/kenney_platformer-pack-redux/PNG/HUD/hudHeart_full.png" id="3_6l7iq"]
+[ext_resource type="Texture2D" uid="uid://h3fiox6i1kgy" path="res://Assets/Tiles/kenney_platformer-pack-redux/PNG/HUD/hudHeart_half.png" id="4_d3icq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hn7d8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5od0i")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6l7iq")
+}],
+"loop": true,
+"name": &"full",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_d3icq")
+}],
+"loop": true,
+"name": &"half",
+"speed": 5.0
+}]
 
 [node name="GUI" type="Control"]
 layout_mode = 3
@@ -13,13 +43,35 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4xk2o")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="BoxContainer" type="BoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
+offset_bottom = 150.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BoxContainer/HBoxContainer"]
+position = Vector2(71, 67)
+sprite_frames = SubResource("SpriteFrames_hn7d8")
+animation = &"empty"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="BoxContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "life"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="BoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Timer"

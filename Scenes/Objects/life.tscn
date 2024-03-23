@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm042cttaw1qu"]
+
+[ext_resource type="Texture2D" uid="uid://calrkjsqfu160" path="res://Assets/Tiles/kenney_platformer-pack-redux/PNG/HUD/hudHeart_full.png" id="1_dhkwf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s8dth"]
+radius = 43.2897
+
+[node name="Life" type="Area2D" groups=["Life"]]
+collision_layer = 16
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_dhkwf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_s8dth")

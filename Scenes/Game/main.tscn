@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://btn4jcsvtqwwc"]
+[gd_scene load_steps=6 format=3 uid="uid://btn4jcsvtqwwc"]
 
 [ext_resource type="PackedScene" uid="uid://6j2k4n0uono1" path="res://Scenes/Levels/level_1.tscn" id="1_h0sr6"]
 [ext_resource type="PackedScene" uid="uid://ro3n5thlv5qx" path="res://Scenes/UI/gui.tscn" id="1_mv4ib"]
 [ext_resource type="PackedScene" uid="uid://bh3v8hx61myb" path="res://Scenes/Characters/Player/player.tscn" id="2_ge5je"]
 [ext_resource type="PackedScene" uid="uid://ddwnu3m1c1jpf" path="res://Scenes/Characters/Enemies/bee_enemy.tscn" id="3_oyc3t"]
+[ext_resource type="PackedScene" uid="uid://cm042cttaw1qu" path="res://Scenes/Objects/life.tscn" id="5_81ewf"]
 
 [node name="Main" type="Node"]
 metadata/_edit_horizontal_guides_ = [1080.0]
 
 [node name="GUI" parent="." instance=ExtResource("1_mv4ib")]
+offset_left = -2.0
+offset_right = -2.0
 
 [node name="Level 1" parent="." instance=ExtResource("1_h0sr6")]
 
@@ -18,3 +21,9 @@ jumpForce = 600.0
 
 [node name="BeeEnemy" parent="." instance=ExtResource("3_oyc3t")]
 position = Vector2(867, 806)
+
+[node name="Life" parent="." instance=ExtResource("5_81ewf")]
+position = Vector2(166, 671)
+
+[node name="Life2" parent="." instance=ExtResource("5_81ewf")]
+position = Vector2(395, 633)
