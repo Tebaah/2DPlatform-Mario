@@ -4,9 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://ro3n5thlv5qx" path="res://Scenes/UI/gui.tscn" id="1_mv4ib"]
 [ext_resource type="PackedScene" uid="uid://bh3v8hx61myb" path="res://Scenes/Characters/Player/player.tscn" id="2_ge5je"]
 [ext_resource type="PackedScene" uid="uid://ddwnu3m1c1jpf" path="res://Scenes/Characters/Enemies/bee_enemy.tscn" id="3_oyc3t"]
-[ext_resource type="PackedScene" uid="uid://cm042cttaw1qu" path="res://Scenes/Objects/life.tscn" id="5_81ewf"]
+[ext_resource type="PackedScene" uid="uid://c8e54qrkyreen" path="res://Scenes/Characters/Enemies/mouse_enemy.tscn" id="4_u70d6"]
 
 [node name="Main" type="Node"]
+metadata/_edit_vertical_guides_ = [12927.0]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -16,21 +17,67 @@ offset_right = -2.0
 
 [node name="Level 1" parent="." instance=ExtResource("1_h0sr6")]
 
+[node name="Coins" type="Node" parent="."]
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="bees" type="Node" parent="Enemies"]
+
+[node name="BeeEnemy" parent="Enemies/bees" instance=ExtResource("3_oyc3t")]
+position = Vector2(2356, 808)
+destiny = 2256.0
+
+[node name="BeeEnemy2" parent="Enemies/bees" instance=ExtResource("3_oyc3t")]
+position = Vector2(5089, 808)
+destiny = 4989.0
+
+[node name="BeeEnemy3" parent="Enemies/bees" instance=ExtResource("3_oyc3t")]
+position = Vector2(3419, 808)
+destiny = 3319.0
+
+[node name="BeeEnemy4" parent="Enemies/bees" instance=ExtResource("3_oyc3t")]
+position = Vector2(6922, 425)
+destiny = 6000.0
+
+[node name="BeeEnemy6" parent="Enemies/bees" instance=ExtResource("3_oyc3t")]
+position = Vector2(7903, 811)
+destiny = 7226.0
+
+[node name="BeeEnemy7" parent="Enemies/bees" instance=ExtResource("3_oyc3t")]
+position = Vector2(10199, 811)
+destiny = 8833.0
+
+[node name="BeeEnemy5" parent="Enemies/bees" instance=ExtResource("3_oyc3t")]
+position = Vector2(6633, 425)
+destiny = 5774.0
+
+[node name="Mouses" type="Node" parent="Enemies"]
+
+[node name="MouseEnemy" parent="Enemies/Mouses" instance=ExtResource("4_u70d6")]
+position = Vector2(2215, 832)
+speed = 200.0
+destiny = 50.0
+
+[node name="MouseEnemy2" parent="Enemies/Mouses" instance=ExtResource("4_u70d6")]
+position = Vector2(4539, 832)
+speed = 200.0
+destiny = 3733.0
+
+[node name="MouseEnemy3" parent="Enemies/Mouses" instance=ExtResource("4_u70d6")]
+position = Vector2(7631, 832)
+speed = 200.0
+destiny = 7127.0
+
+[node name="MouseEnemy4" parent="Enemies/Mouses" instance=ExtResource("4_u70d6")]
+position = Vector2(11481, 832)
+speed = 200.0
+destiny = 9538.0
+
+[node name="MouseEnemy5" parent="Enemies/Mouses" instance=ExtResource("4_u70d6")]
+position = Vector2(14166, 811)
+speed = 200.0
+destiny = 12927.0
+
 [node name="Player" parent="." instance=ExtResource("2_ge5je")]
-position = Vector2(9929, 802)
+position = Vector2(345, 802)
 jumpForce = 600.0
-
-[node name="BeeEnemy" parent="." instance=ExtResource("3_oyc3t")]
-position = Vector2(868, 808)
-
-[node name="BeeEnemy2" parent="." instance=ExtResource("3_oyc3t")]
-position = Vector2(1271, 808)
-
-[node name="BeeEnemy3" parent="." instance=ExtResource("3_oyc3t")]
-position = Vector2(1057, 808)
-
-[node name="Life" parent="." instance=ExtResource("5_81ewf")]
-position = Vector2(166, 670)
-
-[node name="Life2" parent="." instance=ExtResource("5_81ewf")]
-position = Vector2(395, 633)
